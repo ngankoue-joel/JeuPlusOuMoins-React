@@ -1,0 +1,44 @@
+  
+  /* style.css */
+
+/* Styles for the game container */
+.jeu-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Styles for the input field */
+.jeu-input {
+  margin: 20px;
+  padding: 10px;
+  width: 200px;
+  font-size: 16px;
+}
+
+/* Styles for the game message */
+.jeu-message {
+  color: green;
+  font-size: 20px;
+}
+
+/* Styles for the submit button */
+.jeu-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Styles for the username input */
+.jeu-username {
+  margin-top: 20px;
+  font-size: 16px;
+  padding: 03px;
+}
+
+/* Styles for the difficulty select */
+.jeu-difficulty {
+  margin-top: 10px;
+  font-size: 16px;
+}
