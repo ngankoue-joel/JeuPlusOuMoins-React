@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './JeuPlusOuMoins.css';
-
+import './JeuPlusOuMoins.css'; // Assurez-vous que le chemin d'accès est correct
 
 const JeuPlusOuMoins = () => {
   const [nombreMystere, setNombreMystere] = useState(Math.floor(Math.random() * 100) + 1);
@@ -9,7 +8,7 @@ const JeuPlusOuMoins = () => {
   const [tentatives, setTentatives] = useState(0);
   const [username, setUsername] = useState('');
   const [difficulte, setDifficulte] = useState('facile');
-  const [leaderboard, setLeaderboard] = useState(JSON.parse(localStorage.getItem('leaderboard')) || []);
+  const [leaderboard, setLeaderboard] = useState(JSON.parse(sessionStorage.getItem('leaderboard')) || []);
 
   useEffect(() => {
     const maxTentatives = calculerMaxTentatives(difficulte);
@@ -54,47 +53,67 @@ const JeuPlusOuMoins = () => {
     const scoresExistant = leaderboard.filter(score => score.username === username && score.difficulte === difficulte);
     if (scoresExistant.length === 0 || scoresExistant.every(scoreExistant => scoreExistant.tentatives > tentatives)) {
       setLeaderboard([...leaderboard, score]);
-      localStorage.setItem('leaderboard', JSON.stringify([...leaderboard, score]));
+      sessionStorage.setItem('leaderboard', JSON.stringify([...leaderboard, score]));
     }
   };
 
   return (
-    <div className='jeu-container'>
+    <div className="jeu-container">
       <h2>Jeu du Plus ou Moins</h2>
-      <p className='jeu-message'>{message}</p>
+      <p className="jeu-message">{message}</p>
       <form onSubmit={verifierNombre}>
         <input
           type="number"
+          className="jeu-input"
           value={nombre}
           onChange={(e) => setNombre(e.target.value)}
           min="1"
           max="100"
         />
-        <button className='jeu-button' type="submit">Vérifier</button>
+        <button className="jeu-button" type="submit">Vérifier</button>
       </form>
       <div>
         <label>Username: </label>
         <input
-          type="text" className='jeu-username'
+          type="text"
+          className="jeu-username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
       <div>
         <label>Difficulté: </label>
-        <select className='jeu-difficulty' value={difficulte} onChange={(e) => setDifficulte(e.target.value)}>
+        <select
+          className="jeu-difficulty"
+          value={difficulte}
+          onChange={(e) => setDifficulte(e.target.value)}
+        >
           <option value="facile">Facile</option>
           <option value="normal">Normal</option>
           <option value="difficile">Difficile</option>
           <option value="tres difficile">Très Difficile</option>
         </select>
       </div>
-      {/* Affichage du leaderboard */}
       <div>
         <h3>Leaderboard</h3>
-        {leaderboard.sort((a, b) => a.tentatives - b.tentatives).map((score, index) => (
-          <p key={index}>{score.username} ({score.difficulte}): {score.tentatives} tentatives</p>
-        ))}
+        <table>
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Difficulté</th>
+              <th>Tentatives</th>
+            </tr>
+          </thead>
+          <tbody>
+            {leaderboard.sort((a, b) => a.tentatives - b.tentatives).map((score, index) => (
+              <tr key={index}>
+                <td>{score.username}</td>
+                <td>{score.difficulte}</td>
+                <td>{score.tentatives}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@
 .jeu-container {
   text-align: center;
   margin-top: 50px;
+  font-weight: bolder;
 }
 
 /* Styles for the input field */
@@ -41,4 +42,36 @@
 .jeu-difficulty {
   margin-top: 10px;
   font-size: 16px;
+  padding: 1px;
+}
+
+/* Style of the table for the leaderboard */
+table {
+  margin-top: 20px; 
+  width: 100%; 
+  border-collapse: collapse; 
+}
+
+/* Style of the table header and body cells */
+th,
+td {
+  border: 1px solid #ddd; 
+  padding: 8px; 
+  text-align: left;
+}
+
+/* Style of the table header */
+th {
+  background-color: #4CAF50; 
+  color: white; 
+}
+
+/* Style of the even rows of the table to improve readability */
+tr:nth-child(even) {
+  background-color: #f2f2f2; 
+}
+
+/* Style on hover of the table rows */
+tr:hover {
+  background-color: #ddd; 
 }
